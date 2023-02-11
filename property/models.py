@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
@@ -12,7 +13,6 @@ class Flat(models.Model):
 
     description = models.TextField('Текст объявления', blank=True)
     price = models.IntegerField('Цена квартиры', db_index=True)
-
     town = models.CharField(
         'Город, где находится квартира',
         max_length=50,
@@ -46,7 +46,9 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
+
     new_building = models.BooleanField('Новостройка', default=False)
+    liked_by = models.ManyToManyField(User,  related_name='flats', verbose_name="Кто лайкнул")
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
