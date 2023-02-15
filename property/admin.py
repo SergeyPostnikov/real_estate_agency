@@ -12,8 +12,6 @@ class FlatAdmin(admin.ModelAdmin):
                     'new_building', 
                     'construction_year', 
                     'town', 
-                    'owner_pure_phone',
-                    'owners_phonenumber'
         )
     list_editable = ('new_building',)
     raw_id_fields = ('liked_by',)
@@ -26,8 +24,14 @@ class ComplainAdmin(admin.ModelAdmin):
 
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ('flats',)
+    list_display = (
+        'owner_name',
+        'owner_pure_phone',
+        'owners_phonenumber'
+        )
 
 
 admin.site.register(Flat, FlatAdmin)
 admin.site.register(Complain, ComplainAdmin)
 admin.site.register(Owner, OwnerAdmin)
+    
