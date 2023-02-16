@@ -6,9 +6,9 @@ from django.db import migrations
 def separate_owner(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    flats_iterator = Flat.objects.all().iterator()
+    flats = Flat.objects.all()
     
-    for flat in flats_iterator:        
+    for flat in flats.iterator():        
         Owner.objects.get_or_create(
             owner_name=flat.owner,
             owners_phonenumber=flat.owners_phonenumber,
